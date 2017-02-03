@@ -1,0 +1,10 @@
+
+
+  tam x, y, z 10], k;  // [ ommitted after z
+
+ x = 4 + 9   // ; ommitted
+
+ say(k, 1, 3){
+    eger ( x >  )  // ommitted right operand of comparision
+     y =  z[x + 4] - 12 ;
+}

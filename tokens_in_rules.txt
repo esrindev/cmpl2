@@ -1,0 +1,277 @@
+PRG, {  }, 0 
+VAR, {  }, 0 
+TAM, { VDEC  }, 1
+KESR, {  }, 0 
+SIMVOL, {  }, 0 
+IDT, { ASGN_OP , VDEC , SEQ , SHERT ,  BRK_VAL , ARYBRK_VAL , CRG1 , DECREMENT_OPR ,INCREMENT_OPR , QAYTAR1 , FCALL1 , EXPR }, 12 
+VERGUL, { SEQ }, 1
+NOQTEV, { DAVAMET1 , DAYAN1 , ASGN_OP ,  SIMPLE_OPER , DECREMENT_OPR ,  INCREMENT_OPR , QAYTAR1   }, 7 
+KOD, {  }, 0 
+CAPET, {  }, 0 
+OPNBRK, { BRK_EMP , BRK_VAL , BRK_SHERT , BRK_SEQ   }, 4 
+STR, { ASGN_OP,  BRK_VAL   }, 2 
+CHR, { ASGN_OP , HAL1 , SEQ , SHERT , BRK_VAL , ARYBRK_VAL , QAYTAR1 , EXPR  }, 8 
+CLSBRK, { BRK_EMP , BRK_VAL , BRK_SHERT , BRK_SEQ  }, 4 
+SON, {  }, 0 
+DOT, {  }, 0 
+LEXEM, {  }, 0 
+NUMB, { ASGN_OP , HAL1 , SEQ , SHERT , BRK_VAL , ARYBRK_VAL , QAYTAR1 , EXPR }, 8 
+SIGN, {  }, 0 
+DIG, {  }, 0 
+POSDIG, {  }, 0 
+POSNUMB, {  }, 0 
+SNUMB, {  }, 0 
+POSSIG, { EXPR }, 1
+NEGSIG, { EXPR }, 1 
+SLC, {  }, 0 
+MLC, {  }, 0 
+SPS, {  }, 0 
+COLON, { HAL1 ,  SUS1  }, 2 
+ARYOPN, { ARYBRK_VAL  }, 1
+ARYCLS, { ARYBRK_VAL }, 1 
+ASGN, { ASGN_OP }, 1 
+MULT, { EXPR   }, 1
+DEL, { EXPR }, 1
+PRCT, { EXPR  }, 1 
+XAR, {  }, 0 
+DAXIL, {  }, 0 
+EGER, { EGER_EXP2  }, 1 
+NIDA, {  }, 0 
+GRT, { SHERT }, 1
+LES, { SHERT }, 1 
+VE, { SHERT   }, 1 
+VEYA, { SHERT }, 1 
+FILESON, {  }, 0 
+OPNBLK, { BLOCK , COMP_OPER  }, 2
+CLSBLK, { BLOCK , COMP_OPER ,  }, 2
+ONDA, {  }, 0 
+YOXSA, { COMP_OPER , EGER_YOXSA , YOXSA_OPER ,  }, 3
+BERABER, { SHERT }, 1
+FERQLI, { SHERT }, 1
+LESEQU, { SHERT }, 1
+GRTEQU, { SHERT }, 1
+EMPTOK, {  }, 0 
+SHERT, { SHERT , BRK_SHERT }, 2
+IFAD, {  }, 0 
+DOVR, {  }, 0 
+ARTSIN, {  }, 0 
+AZALSIN, {  }, 0 
+ADDIM, {  }, 0 
+KIMI, {  }, 0 
+CRG1, { ASGN_OP , VDEC , SEQ , SHERT ,  BRK_VAL , ARYBRK_VAL , CRG2 , DECREMENT_OPR , INCREMENT_OPR , QAYTAR1 , EXPR ,}, 11
+CRG2, { ASGN_OP ,  VDEC , SEQ , SHERT , BRK_VAL , ARYBRK_VAL , DECREMENT_OPR , INCREMENT_OPR , QAYTAR1 , EXPR  }, 10 
+TEKRARET, {  }, 0 
+DAN, {  }, 0 
+DEN, {  }, 0 
+CAPET_OP, {  }, 0 
+DOVR_OP, {  }, 0 
+BLOCK, { FUNK , KOD_FUNK , BLOCK , KOD_PART , COMP_OPER , EGER_YOXSA , YOXSA_OPER ,  HAL2 , TEXT  }, 9 
+BIRTIP, {  }, 0 
+TIPLER, {  }, 0 
+EGER_OP, {  }, 0 
+ASGN_OP, { SIMPLE_OPER   }, 1 
+DAXIL_OP, {  }, 0 
+BLOKSUZ, {  }, 0 
+BLOKLU, {  }, 0 
+KODDATALAR, {  }, 0 
+BLOKLUDATA, {  }, 0 
+YE, {  }, 0 
+YA, {  }, 0 
+EE, {  }, 0 
+AA, {  }, 0 
+DOVR_EXP, {  }, 0 
+EGER_EXP, {  }, 0 
+DOVR_BLOKSUZ, {  }, 0 
+EGER_BLOKSUZ, {  }, 0 
+YOXSA_BLOKSUZ, {  }, 0 
+KODDATA, {  }, 0 
+DOVR_BLOKLU, {  }, 0 
+EGER_BLOKLU, {  }, 0 
+YOXSA_BLOKLU, {  }, 0 
+EGER_TEK_BLOKSUZ, {  }, 0 
+EGER_TAM_BLOKSUZ, {  }, 0 
+TAM1, {  }, 0 
+TAM2, {  }, 0 
+KESR1, {  }, 0 
+KESR2, {  }, 0 
+SIMVOL1, {  }, 0 
+SIMVOL2, {  }, 0 
+SIMVOL3, {  }, 0 
+VAR1, {  }, 0 
+VAR2, {  }, 0 
+DAXILET1, {  }, 0 
+DAXILET2, {  }, 0 
+CAPET1, {  }, 0 
+CAPET2, {  }, 0 
+EGER_EXP1, {  }, 0 
+EGER_EXP2, { COMP_OPER , EGER_YOXSA  }, 2
+KOD1, {  }, 0 
+PRG1, {  }, 0 
+BADSTR, {  }, 0 
+BADIDT, {  }, 0 
+BADCHR, {  }, 0 
+DAXILET3, {  }, 0 
+EMPTYOP, {  }, 0 
+CAPET3, {  }, 0 
+EXPR, { ASGN_OP , SEQ , SHERT , BRK_VAL , ARYBRK_VAL , QAYTAR1 , EXPR , }, 7 
+OPR, {  }, 0 
+BRK, {  }, 0 
+FILEBEG, {  }, 0 
+FLOAT_HALF, {  }, 0 
+FLOAT, { ASGN_OP ,  SEQ , SHERT ,  BRK_VAL , ARYBRK_VAL , QAYTAR1 , EXPR , }, 7 
+FUNKSIYA, { FUNK }, 1 
+FUNK_ELAN, {  }, 0 
+FUNK_BODY, {  }, 0 
+EMPBRK, {  }, 0 
+FE1, {  }, 0 
+FE2, {  }, 0 
+FUNK, { KOD_FUNK , TEXT }, 2
+FUNKS, {  }, 0 
+FCALL, {  }, 0 
+FCALL1, { FUNK , ASGN_OP , SIMPLE_OPER  }, 3
+VDEC, { SIMPLE_OPER ,  }, 1 
+DUMMY, {  }, 0 
+FDECL, {  }, 0 
+PRG2, {  }, 0 
+QAYTAR, { QAYTAR1 }, 1
+QAYTAR1, { SIMPLE_OPER  }, 1 
+NEQEDERKI, { NEQEDERKI2 }, 1 
+NEQEDERKI1, {  }, 0 
+NEQEDERKI2, { COMP_OPER }, 1
+DAVAMET, { DAVAMET1 ,  }, 1 
+DAYAN, { DAYAN1 ,  }, 1 
+DAVAMET1, { SIMPLE_OPER ,  }, 1 
+DAYAN1, { SIMPLE_OPER ,  }, 1 
+SEC, { SEC1 ,  }, 1 
+SEC_OP, {  }, 0 
+HAL, { HAL1 }, 1
+HAL1, { HAL1S , HAL2 }, 2
+HAL2, { COMP_OPER , HAL2   }, 2
+HAL3, {  }, 0 
+SEC1, { COMP_OPER ,  }, 1 
+SUSMA, { SUS1 ,  }, 1 
+START, {  }, 0 
+STRUKT, {  }, 0 
+STRUKT1, {  }, 0 
+STRUKT2, {  }, 0 
+STRUKT3, {  }, 0 
+YNT1, {  }, 0 
+YNT2, {  }, 0 
+STRMEM, {  }, 0 
+YNTS, {  }, 0 
+SINIF, {  }, 0 
+MEXSUSI, {  }, 0 
+UMUMI, {  }, 0 
+QORUNAN, {  }, 0 
+SINIF_HEAD, {  }, 0 
+SINIF_HEAD_START, {  }, 0 
+SINIF_BODY, {  }, 0 
+SINIF_DECL, {  }, 0 
+SINIF_TYPE, {  }, 0 
+YENI_TIP, {  }, 0 
+SNMEM, {  }, 0 
+INIT_DOVR, {  }, 0 
+CHECK_DOVR, {  }, 0 
+STEP_DOVR, {  }, 0 
+NEQ_TOP, {  }, 0 
+SUS1, { HAL2 }, 1
+HAL1S, { HAL1S , HAL2  }, 2
+FARGS, {  }, 0 
+FPARM, {  }, 0 
+FCALL_BEG, {  }, 0 
+PUT_RET_ADDR, {  }, 0 
+IDT_ADRS, {  }, 0 
+CRG1_ADRS, {  }, 0 
+CRG2_ADRS, {  }, 0 
+CRG1_VAL, {  }, 0 
+CRG2_VAL, {  }, 0 
+IDT_VAL, {  }, 0 
+IDT_OFST, {  }, 0 
+CRG1_OFST, {  }, 0 
+CRG2_OFST, {  }, 0 
+STRMEM_VAL, {  }, 0 
+CAPET_NUMB, {  }, 0 
+CAPET_FLOAT, {  }, 0 
+CAPET_CHR, {  }, 0 
+CAPET_STR, {  }, 0 
+CAPET_IDT, {  }, 0 
+CAPET_CRG1, {  }, 0 
+CAPET_CRG2, {  }, 0 
+CAPET_STRMEM, {  }, 0 
+CHR_ADRS, {  }, 0 
+STR_ADRS, {  }, 0 
+CAPET_EXPR, {  }, 0 
+DAXILET_IDT, {  }, 0 
+FARGS_NUMB, {  }, 0 
+FARGS_FLOAT, {  }, 0 
+FARGS_CHR, {  }, 0 
+FARGS_STR, {  }, 0 
+FARGS_IDT_VAL, {  }, 0 
+FARGS_CRG1_VAL, {  }, 0 
+FARGS_CRG2_VAL, {  }, 0 
+FARGS_STRMEM_VAL, {  }, 0 
+FARGS_EXPR_VAL, {  }, 0 
+FPARM_IDT_VAL, {  }, 0 
+POP_OBSTK, {  }, 0 
+GLBMT, {  }, 0 
+FREE_SEC_DYN_STK, {  }, 0 
+KVK, {  }, 0 
+KVK1, {  }, 0 
+POP_FNSTK, {  }, 0 
+GET_FUNC_RET_RES, {  }, 0 
+PUT_FUNC_RET_RES, {  }, 0 
+KOD_WITH_VAR, {  }, 0 
+KOD_FUNK, { KOD_FUNK , TEXT }, 2
+TEXT, { TEXT }, 1
+STANDART, {  }, 0 
+STANDART_FUNK, {  }, 0 
+KVADRAT_KOK, {  }, 0 
+STEKE_QOY, {  }, 0 
+STEKE_QOY_STD, {  }, 0 
+STEKDEN_GOTUR, {  }, 0 
+STEKDEN_GOTUR_STD, {  }, 0 
+SAY, { SAY_TIP_1 }, 1
+SAY_TIP_1, { COMP_OPER }, 1
+CHECK_SAY_TIP_1, {  }, 0 
+STEP_SAY_TIP_1, {  }, 0 
+YNT1_FUNC_ARGS, {  }, 0 
+SAY_TIP_2, {  }, 0 
+SAY_TIP_3, {  }, 0 
+CHECK_SAY_TIP_2, {  }, 0 
+STEP_SAY_TIP_2, {  }, 0 
+CHECK_SAY_TIP_3, {  }, 0 
+STEP_SAY_TIP_3, {  }, 0 
+INIT_SAY_TIP_3, {  }, 0 
+INIT_SAY_TIP_2, {  }, 0 
+INCREMENT, { INCREMENT_OPR  }, 1
+DECREMENT, { DECREMENT_OPR  }, 1
+INCREMENT_OPR, { SIMPLE_OPER ,  }, 1 
+DECREMENT_OPR, { SIMPLE_OPER ,  }, 1 
+DAXIL_INSIDE, {  }, 0 
+CAPET_INSIDE, {  }, 0 
+EGER_INSIDE, {  }, 0 
+ARRAY_INDEX, {  }, 0 
+FCALL_VDEC, {  }, 0 
+SHERT_RIGHT, {  }, 0 
+ASGN_RIGHT, {  }, 0 
+SAY_INSIDE, {  }, 0 
+FUNKSIYA_ELAN, {  }, 0 
+BLOCK_INSIDE, {  }, 0 
+SINIF_INSIDE, {  }, 0 
+FREE_CONTEXT, {  }, 0 
+OPERATOR, {  }, 0 
+SIMPLE_OPER, { KOD_FUNK ,  BLOCK , KOD_PART , COMP_OPER ,  EGER_YOXSA , YOXSA_OPER , HAL2 , TEXT }, 8 
+EGER_OPER, {  }, 0 
+EGER_YOXSA, { COMP_OPER }, 1
+EGER_YOXSA_OPER, {  }, 0 
+NEQEDERKI_OPER, {  }, 0 
+SECIM_OPER, {  }, 0 
+KOD_PART, { KOD_FUNK , BLOCK , KOD_PART ,  HAL2 ,  TEXT  }, 5
+SAY_OPER, {  }, 0 
+COMP_OPER, { KOD_FUNK ,BLOCK , KOD_PART ,  COMP_OPER ,   EGER_YOXSA ,   YOXSA_OPER ,  HAL2 ,   TEXT , }, 8
+BRK_VAL, { SEC1 , SAY_TIP_1 , ASGN_OP ,  SEQ ,  SHERT , BRK_VAL , QAYTAR1 , FCALL1 , EXPR }, 9 
+ARYBRK_VAL, { CRG2 , CRG1 ,  }, 2 
+BRK_SHERT, { NEQEDERKI2 , EGER_EXP2 , SHERT ,  BRK_SHERT ,  }, 4
+SEQ, { VDEC , SEQ , BRK_SEQ ,  }, 3
+BRK_SEQ, { SAY_TIP_1 , BRK_SEQ , FCALL1 ,  }, 3 
+BRK_EMP, { BRK_EMP , FCALL1 ,  }, 2 

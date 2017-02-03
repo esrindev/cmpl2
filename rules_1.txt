@@ -1,0 +1,254 @@
+//r1
+   if (matchid(a,FUNKSIYA) && matchid(b, FCALL1) && matchid(c, BLOCK)){
+       ptr->id = FUNK;
+	   
+//r2	   
+  if ((matchid(a,FUNK)|| matchid(a,KOD_PART) || sim_com_blk(a) ||matchid(a,KOD_FUNK)) && \
+	  (matchid(b,FUNK)|| matchid(b,KOD_PART) || sim_com_blk(b) ||matchid(b,KOD_FUNK))){
+       ptr->id = KOD_FUNK;
+	   
+//r3	   
+	   if (matchid(a,OPNBLK) && (matchid(b,KOD_PART) || sim_com_blk(b)) && matchid(c,CLSBLK))
+   ptr->id  = BLOCK;
+
+//r4   
+  if (matchid(a,OPNBLK) && matchid(b,CLSBLK))  
+   ptr->id  = BLOCK;
+
+      
+	   
+	   //r5
+	     if ( (sim_com_blk(a) || matchid(a, KOD_PART)) && \
+	   (sim_com_blk(b) || matchid(b, KOD_PART)){
+       ptr->id = KOD_PART;
+	   
+	   //r6
+	     if (matchid(a,EGER_EXP2) && sim_com_blk(b) && matchid(c,YOXSA) && sim_com_blk(d)){
+       ptr->id = COMP_OPER;
+	   
+	   //r7
+	     if (matchid(a,EGER_EXP2) && sim_com_blk(b) && matchid(c,YOXSA)){
+       ptr->id = EGER_YOXSA;
+	   
+	   //r8
+	     if (matchid(a,EGER_EXP2) && sim_com_blk(b) && matchid(c,YOXSA_OPER) ){
+       ptr->id = COMP_OPER;
+	   
+	   //r9
+	     if (matchid(a,EGER_YOXSA) && sim_com_blk(b)){
+       ptr->id = COMP_OPER;
+	   
+	   //r10
+	     if (matchid(a,YOXSA) && sim_com_blk(b)){
+       ptr->id = YOXSA_OPER;
+	   
+	   //r11
+	     if (matchid(a,EGER_EXP2) && sim_com_blk(b)){
+       ptr->id = COMP_OPER;
+	   
+	   //r12
+	     if (matchid(a,NEQEDERKI2) && sim_com_blk(b)){
+       ptr->id = COMP_OPER;
+	   
+	   //r13
+	      if (matchid(a,SEC1) && matchid(b, OPNBLK) &&  matchid(c, HAL2) &&  matchid(d, CLSBLK)){
+       ptr->id = COMP_OPER;
+	   
+	   //14
+	     if ((matchid(a,SAY_TIP_1) || matchid(a,SAY_TIP_2) || matchid(a,SAY_TIP_3)) && sim_com_blk(b)){
+       ptr->id = COMP_OPER;
+	   
+	   //r15
+      if (matchid(a,NEQEDERKI) && matchid(b,BRK_SHERT)){
+       ptr->id = NEQEDERKI2;
+	   
+	   //r16
+	     if (matchid(a,SEC) && matchid(b,BRK_VAL)){
+       ptr->id = SEC1;
+	   
+	    //17
+        if (matchid(a,EGER) && matchid(b,BRK_SHERT)){
+       ptr->id =  EGER_EXP2;
+	   
+	   //r18
+	     if (matchid(a,DAVAMET) && matchid(b,NOQTEV)){
+         ptr->id = DAVAMET1;
+	   
+	   //r19
+	     if (matchid(a,DAYAN) && matchid(b,NOQTEV)){
+       ptr->id = DAYAN1;
+	   
+	   //r20
+	     if (matchid(a,SAY) && (matchid(b, BRK_VAL)||matchid(b, BRK_SEQ))){
+    ptr->id = SAY_TIP_1;
+	
+	//r21
+	  if (match_ia(a) && matchid(b,ASGN) && (match_inacsfE(c)|| matchid(c, BRK_VAL) ||  matchid(c, FCALL1)) && matchid(d,NOQTEV)){
+    ptr->id  = ASGN_OP;
+	
+	//r22
+	  if (matchid(a,HAL) && (matchid(b,NUMB) || matchid(b, CHR)) && matchid(c, COLON)){
+    ptr->id  = HAL1;
+	
+	//r23
+  if (matchid(a,TAM) && ( match_ia(b) || matchid(b, SEQ))){
+		ptr->id  = VDEC;
+		
+		
+		//r24
+		  if (matchid(a, VDEC) && matchid(b, NOQTEV)){
+		ptr->id  = SIMPLE_OPER;
+		
+		//25
+	  if (matchid(a,SUSMA) && matchid(b, COLON) ){
+      ptr->id  = SUS1;
+	
+	//r26
+	  if ((matchid(a,HAL1) || matchid(a, HAL1S))&& (matchid(b, HAL1)||matchid(b, HAL1S))){
+    ptr->id  = HAL1S;
+	
+	//r27
+	  if (((matchid(a,HAL1) || matchid(a, HAL1S) || matchid(a, SUS1)) && \
+       (matchid(b,KOD_PART) || sim_com_blk(b))) || \
+       (matchid(a, HAL2) && matchid(b, HAL2))   || \
+	   (matchid(a, HAL2) && (matchid(b,KOD_PART) || sim_com_blk(b)))){
+    ptr->id  = HAL2;
+	
+	//r28
+	  if (matchid(a,OPNBRK) && matchid(b, CLSBRK)){
+    ptr->id  = BRK_EMP;
+	
+	//r29
+ if ((matchid(a,TEXT) || matchid(a,KOD_FUNK) || matchid(a,FUNK) || matchid(a,KOD_PART) || sim_com_blk(a)) && \
+	 (matchid(b,TEXT) || matchid(b,KOD_FUNK) || matchid(b,FUNK) || matchid(b,KOD_PART) || sim_com_blk(b)))
+    ptr->id  = TEXT;
+
+	//r30
+ if (matchid(a,KOD_FUNK) || matchid(a,FUNK) || matchid(a,KOD_PART) || sim_com_blk(a))
+          ptr->id  = TEXT;
+	   
+	   
+	   //r31
+	     if (matchid(a,FCALL1) && matchid(b,NOQTEV)){
+    ptr->id  = SIMPLE_OPER;
+	
+	//r32
+	 if ((matchid(a,SHERT) || matchid(a,BRK_SHERT)) && (matchid(b,VE)||matchid(b,VEYA)) && (matchid(c,SHERT) || matchid(c,BRK_SHERT))){
+	    ptr->id  = SHERT;
+		
+		
+		//r33
+		 if ((match_inacsfE(a) || matchid(a,BRK_VAL) || matchid(a,SEQ)) && \
+	  matchid(b,VERGUL)&& \
+	 (match_inacsfE(c) || matchid(c,BRK_VAL) || matchid(c,SEQ))){
+	    ptr->id  = SEQ;
+		
+		//r34
+  if ((match_inacf(a)|| matchid(a, EXPR) || matchid(a, BRK_VAL)) && match_cond(b) && (match_inacf(c)|| matchid(c, EXPR)  || matchid(c, BRK_VAL) )){
+       ptr->id  = SHERT; 
+	   
+	   
+	   //r35
+	     if (matchid(a,OPNBRK) &&  matchid(c,CLSBRK)){ 	   
+    
+	  switch(b){
+	  case IDT:
+	  case CRG1:
+	  case CRG2:
+	  case NUMB:
+	  case FLOAT:
+	  case CHR:
+	  case EXPR:
+	  case STR:
+	  case BRK_VAL:
+		  ptr->id  = BRK_VAL;	
+		  
+		  
+		 //r36 
+		    if (matchid(a,OPNBRK) &&  matchid(c,CLSBRK)){ 	   
+    	  case SHERT:
+	  case BRK_SHERT:
+		  ptr->id  = BRK_SHERT;	
+		  
+		  
+		  //r37
+		    if (matchid(a,OPNBRK) &&  matchid(c,CLSBRK)){ 			  
+		  	  case SEQ:
+	  case BRK_SEQ:
+		  ptr->id  = BRK_SEQ;	
+
+          //r38
+		    if (matchid(a,OPNBRK) &&  matchid(c,CLSBRK)){		  
+		  	  case BRK_EMP:
+		  ptr->id  = BRK_EMP;
+		  
+		  //r39
+		    if (matchid(a,ARYOPN) &&  matchid(c,ARYCLS)){ 	   
+    
+	  switch(b){
+	  case IDT:
+	  case CRG1:
+	  case CRG2:
+	  case NUMB:
+	  case FLOAT:
+	  case CHR:
+	  case EXPR:
+		  ptr->id  =  ARYBRK_VAL;
+		  
+		  
+		  //r40
+		    if (matchid(a,CRG1) && matchid(b,ARYBRK_VAL)){ 
+    ptr->id  = CRG2;
+	
+	
+	//r41
+ if (matchid(a,IDT) && matchid(b,ARYBRK_VAL)){
+	   ptr->id  = CRG1;
+
+
+  if ((match_ia(a) && matchid(b, DECREMENT) && matchid(c, NOQTEV) ) ||\
+	  (matchid(a, DECREMENT) && match_ia(b) && matchid(c, NOQTEV) )){
+	   ptr->id  = DECREMENT_OPR;
+
+	   
+	   //r43
+  if ((match_ia(a) && matchid(b, INCREMENT) && matchid(c, NOQTEV) ) ||\
+	  (matchid(a, INCREMENT) && match_ia(b) && matchid(c, NOQTEV) )){
+	   ptr->id  = INCREMENT_OPR;
+
+	   //r44
+  if (matchid(a, QAYTAR) && (match_inacsfE(b) || matchid(b, BRK_VAL)) && matchid(c, NOQTEV))
+   ptr->id  = QAYTAR1;
+
+   //r45
+ if (matchid(a, QAYTAR) && matchid(b, NOQTEV))
+   ptr->id  = QAYTAR1;
+
+   
+   //r46
+  if (matchid(a, IDT) && (matchid(b, BRK_EMP) || matchid(b, BRK_VAL) || matchid(b, BRK_SEQ))){
+		ptr->id  =  FCALL1;
+
+		
+  //r47		
+  if ((match_inaf(a) || matchid(a, EXPR) || matchid(a, BRK_VAL)) && \
+	   match_lp_opr(b) && \
+	  (match_inaf(c) || matchid(c, EXPR) || matchid(c, BRK_VAL) )){
+		ptr->id  = EXPR;
+//same with r47  
+  if ((match_inaf(a) || matchid(a, EXPR) || matchid(a, BRK_VAL)) && \
+	   match_hp_opr(b) && \
+	  (match_inaf(c) || matchid(c, EXPR) || matchid(c, BRK_VAL) )){
+		ptr->id  = EXPR;
+
+   //r48
+  if (matchid(a, DAXILET3)		||  matchid(a, CAPET3)				||  \
+      matchid(a, ASGN_OP)		||  matchid(a, DAVAMET1)			||  \
+	  matchid(a, DAYAN1)		||  matchid(a, QAYTAR1)				||  \
+	  matchid(a, STANDART_FUNK)	||	\
+	  matchid(a, STEKE_QOY_STD) ||  matchid(a, STEKDEN_GOTUR_STD)	||	\
+	  matchid(a, DECREMENT_OPR)	||	matchid(a, INCREMENT_OPR))
+  {
+    ptr->id  = SIMPLE_OPER; 		
+		  
+		  
