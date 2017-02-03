@@ -50,4 +50,4 @@ Hal-hazırda ikinci buraxılışın yalnız səhvlərin tanınması sistemi tər
   sonda isə parsing ağacını çap edir.
 
 
-
+Hal-hazırda Simvollar cədvəllərinin yeni buraxılışı yığılmaqdadır.
