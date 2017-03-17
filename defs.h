@@ -13,18 +13,22 @@
 #define MAX_TOK_LEN 1024
 
 /* max numb of local vars per function */
-#define MAX_DEC 10
+#define MAX_DEC 100
 
 /* max number of var references inside function  */
-#define MAX_USG 40
+#define MAX_USG 100
 
 /* max number of tips, standars and user defined  */
-#define MAX_TIP 10
+#define MAX_TIP 1
 
 /* max number of returns per function  */
 #define MAX_QYT 15
 
-#define MAX_FUNC 10
+#define MAX_FUNC 100
+
+#define MAX_FCALL 100
+
+#define MAX_FUNC_ARGS 100
 
 /* max number of objects in obgect stack  */
 #define MAX_OBJ 100
@@ -80,6 +84,12 @@
 
 //max length of src code
 #define MAX_TEXT_LEN 1000000
+
+//max number of scope childs
+#define MAX_SCOPE_CHILD 100
+
+//max number of standart funcs
+#define MAX_STD_FUNC 20
 
 #endif
 #endif
@@ -167,4 +177,6 @@
 #define ERR_MSG_LEN 1024
 
 #endif
+
+
 #endif

@@ -1,6 +1,8 @@
  
  #include  "esrin.h"
 
+extern void set_func_ids(struct band_list_el band[], int size);
+
 void dump_to_file(char *fname, struct band_list_el band[], int band_size){
 
   int el_size, count, size_t;
@@ -66,8 +68,11 @@ void generate(){
   // now revisit the tree and add funks codes to end of band
   build_exec_band_funks(tree->first->next, exec_band, &band_size);
 
- // print_exec_band(exec_band, band_size);
-  init_fcalls_jmp_addrs(exec_band, band_size);
+
+  set_func_ids(exec_band, band_size);
+
+  print_exec_band(exec_band, band_size);
+ // init_fcalls_jmp_addrs(exec_band, band_size);
 
   dump_to_file("prg.esr_bin", exec_band, band_size);
 }

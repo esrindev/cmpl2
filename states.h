@@ -363,6 +363,9 @@ DOn'T forget to update print_tok funct
 #define TAM_HEAD 286
 #define KESR_HEAD 287
 #define SIMVOL_HEAD 288
+
+//heey these are not in follow list
+#define PRINT_INT 289
 		 
 	 
 

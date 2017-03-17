@@ -165,6 +165,8 @@ struct var{
   /* those used for classes */
   int mbtip; /* private, public, protected  */
   int fa; /* if used as function argument  */
+  int d1;
+  int d2;
 };
 
 
@@ -190,6 +192,7 @@ struct dec_list_el{
 struct dec_table{
   struct var decs[MAX_DEC];
   int size;
+  int count; 
 };
 
 
@@ -201,12 +204,15 @@ struct usg_list_el{
   int memb;
   int ptip;
   int fa; /* if used as function argument  */
+  int utip; //usage tip
 };
+
 
 struct usg_table{
   struct usg_list_el usgs[MAX_USG];
   int count;
 };
+
 
 struct f_usg_el {
 	struct token *tok;
@@ -266,7 +272,7 @@ struct par_list{
   int count;
 };
 
-#define MAX_FUNC_ARGS 100
+
 
 struct func_arg_el{
   struct tok_list_el *tll;
@@ -399,8 +405,13 @@ struct band_list_el {
   int fid;
   int sntip;
   int head_pos;
+  unsigned long hid;
   unsigned char *dt_area;
   int dt_size;
+  int std_func_id;// ID of standart functions, for non std funcs set this field to 0
+  int int_val;
+  char char_val;
+  float float_val;
 };
 
 
@@ -591,6 +602,8 @@ extern void check_errors_2();
 extern int parse_new(struct tok_list *tree);
 
 extern struct tok_list *tree;
+
+extern void symtab_new();
 
 #endif
 

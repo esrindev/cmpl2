@@ -5,7 +5,7 @@
  
  
 #include "esrin.h"
-
+#include "standart.h"
 
 
 extern int prg_start; /* pos of program on exec_band*/
@@ -14,8 +14,159 @@ void addto_band_val(struct tok_list_el *tll, struct band_list_el band[], int *si
 void addto_band_adrs(struct tok_list_el *tll, struct band_list_el band[], int *size, struct tok_list_el **tll_last);
 //void build_exec_band(struct tok_list_el *tll, struct band_list_el band[], int *size);
 
+extern struct dec_table *get_paramts_table(unsigned long hid);
+
 struct band_list_el  exec_band[BAND_SIZE] ;
 int band_size, prg_start;
+
+
+//exec_bandi qurduqdan sonra funk-larin head_pos -larini set edib
+//fcall -ra menimsetmeliyik
+struct gen_func_el{
+	int id; // id of function
+	unsigned long hid; // hid of funcs name
+	int head_pos; // pos of func code at exec band
+};
+
+struct gen_func_table{
+	struct gen_func_el gen_func_els[MAX_FUNC];
+	int count;
+} gft;
+
+
+void add_gen_func_el(struct gen_func_table *gft, unsigned long hid, int h_pos){
+
+	gft->gen_func_els[gft->count].head_pos = h_pos;
+	gft->gen_func_els[gft->count].hid = hid;
+	gft->count++;
+}
+
+void init_gen_func_table(struct band_list_el *exec_band, int size, struct gen_func_table *gft){
+
+	struct band_list_el *bll;
+	int i;
+
+	gft->count = 0;
+
+	for (i=0; i<size; ++i){
+		bll = &exec_band[i];
+		if (bll->band_id == FUNK)
+			add_gen_func_el(gft, bll->hid, i);
+	}
+}
+
+void print_gen_func_table(struct gen_func_table *gft){
+
+	int i;
+
+	printf("Gen func table \n");
+
+	for (i=0; i<gft->count; ++i){
+		printf("h_pos %d \n",gft->gen_func_els[i].head_pos);
+	
+	}
+}
+
+int get_func_head_pos(unsigned long hid, struct gen_func_table *gft){
+
+	int i;
+
+	for (i=0; i<gft->count; ++i)
+		if (gft->gen_func_els[i].hid == hid)
+			return gft->gen_func_els[i].head_pos;
+
+	//error
+	printf("Xeta: funksiya tapilmadi %ul\n", hid);
+	return -1;
+
+}
+
+int get_std_func_id(unsigned long hid, struct std_func_table *sft){
+
+	int i;
+
+	for (i=0; i<sft->count; ++i)
+		if (sft->std_funcs[i].hid == hid)
+			return sft->std_funcs[i].id;
+
+	return 0; //non standart function
+}
+
+void set_fcall_ids(struct band_list_el band[], int size, struct gen_func_table *gft){
+
+	struct band_list_el *bll;
+	int i;
+
+	for (i=0; i<size; ++i){
+		bll = &exec_band[i];
+		if (bll->band_id == FCALL1){
+			bll->head_pos = get_func_head_pos(bll->hid, gft);
+			bll->std_func_id = 0; // set all to 0 means non std. For std id 's will be set later by func
+		}
+	}
+}
+
+
+void set_std_func_ids(struct band_list_el band[], int size, struct std_func_table *sft){
+
+	struct band_list_el *bll;
+	int i;
+
+	for (i=0; i<size; ++i){
+		bll = &exec_band[i];
+		if (bll->band_id == FCALL1)
+			bll->std_func_id = get_std_func_id(bll->hid, sft);
+	}
+}
+
+
+
+static void std_hash(unsigned char *str, unsigned long *h){
+
+  unsigned long hash = 5381;
+
+  int c;
+
+  if (str == NULL){
+    *h =  0;
+    return;
+  }
+
+  while (c = *str){
+    hash = ((hash<<5)+hash)+c;
+    str++;
+  }
+
+  *h = hash;
+}
+
+
+void set_std_func_hids(struct std_func_table *sft){
+
+  unsigned long h;
+  int i;
+
+  for (i=0; i < sft->count; ++i){
+	  std_hash((unsigned char *)sft->std_funcs[i].name, &h);
+	  sft->std_funcs[i].hid = h;
+  }
+}
+
+
+
+ 
+
+void set_func_ids(struct band_list_el band[], int size){
+
+	init_gen_func_table(exec_band, size, &gft);
+	print_gen_func_table(&gft);
+	set_fcall_ids(exec_band, size, &gft);
+	//standart fucs
+	//build_std_func_table(sft);
+	set_std_func_hids(&sft);
+	set_std_func_ids(exec_band, size, &sft);
+
+}
 
 /* if IDT, NUMB, FLOAt, CHR ten just tok, if CRG1/2 then childs[0]->tok, if STRMEM  then ... check code */
 struct token *head_tok(struct tok_list_el *tll){
@@ -287,6 +438,8 @@ void addto_band_new(struct tok_list_el *tll, struct band_list_el band[], int *si
   band[*size].band_id = id;
   if ( tok->tok != NULL)
 	strcpy(band[*size].tok, tok->tok);
+  //maybe we have to remove upper strcopy 
+  
   band[*size].d1 = tok->d1;
   band[*size].d2 = tok->d2;
   band[*size].row = tok->row;
@@ -297,10 +450,36 @@ void addto_band_new(struct tok_list_el *tll, struct band_list_el band[], int *si
   band[*size].ofst = tok->ofst;
   band[*size].fid = tok->fid;
   band[*size].sntip = tok->sntip;
+  band[*size].hid = tok->hid;
   band[*size].head_pos = hpos;
+  band[*size].std_func_id = 0;//std func ids will be set later by func
+
+
+  //set val for constants
+
+  //first set all to 0
+  band[*size].int_val = 0;
+  band[*size].float_val = 0;
+  band[*size].char_val = 0;
+
+  //now set exact value for given const
+  switch(id){
+	  case NUMB:
+		  band[*size].int_val = atoi(tok->tok);
+		  break;
+	  case FLOAT:
+		  band[*size].float_val = atof(tok->tok);
+		  break;
+	  case CHR:
+		  band[*size].char_val = *(tok->tok);
+		  break;
+  }
+
   (*size)++;
 
 }
+
+
 
 int sntip = GLB_TIP;
 int fid = 1;
@@ -525,7 +704,6 @@ void add_fargs_to_band(struct tok_list_el *tll, struct band_list_el band[], int 
   case IDT:
   case CRG1:
   case CRG2:
-  case STRMEM:
   case EXPR:
   addto_band_val(tll, band, size);
   return ;
@@ -544,8 +722,8 @@ void add_fparms_to_band(struct tok_list_el *tll, struct band_list_el band[], int
   int i, old_size, id = tll->id;
   struct tok_list_el *tll_last;
 
-    /* currently  we support only passing variables of type 1,2 or 3 and not arrays to functions */
-    if (tll->cld_cnt == 2 || tll->id == IDT ){
+  /* currently  we support only passing variables of type 1,2 or 3 and not arrays to functions */
+  if (tll->cld_cnt == 2 || tll->id == IDT ){
     addto_band_new(tll->childs[1], band, size, FPARM_IDT_VAL, 0);
     return ;
   }
@@ -554,6 +732,21 @@ void add_fparms_to_band(struct tok_list_el *tll, struct band_list_el band[], int
   /* add args in revers order for stack reasons  */
     for (i = tll->cld_cnt - 1; i>=0; --i)
       add_fparms_to_band(tll->childs[i], band, size);
+
+    return;
+}
+
+
+
+void add_fparms_to_band_new(struct tok_list_el *tll, struct band_list_el band[], int *size){
+
+	struct dec_table *pt;
+	int i;
+
+	pt = get_paramts_table(tll->tok->hid);
+
+	for (i=0; i<pt->count; ++i)
+		addto_band_new(pt->decs[i].tll, band, size, FPARM_IDT_VAL, 0);
 
     return;
 }
@@ -583,37 +776,35 @@ void addto_band_HAL1S(struct tok_list_el *tll, struct band_list_el band[], int *
 
 void build_exec_band_funks(struct tok_list_el *tll, struct band_list_el band[], int *size){
 
-  int i, hpos, old_size, old_size1, old_size2, id = tll->id;
+  int i, hpos, old_size, old_size1, old_size2, id ;
   struct tok_list_el *tmp, *tll_last;
   struct token *tok;
-  
+
   if (*size > BAND_SIZE){
     printf("Icra lenti dolub.\n");
     return;
   }
 
+  id = tll->id;
+
   switch(id){
 
-  case SINIF_TYPE:
   case TEXT:
   case KOD_FUNK:
-  case SINIF_DECL:
-  case SINIF_BODY:
+  case KOD_PART:
+
 
     for (i = 0; i<tll->cld_cnt; ++i)
       build_exec_band_funks(tll->childs[i], band, size);
     break;
 
   case FUNK:
-	tok = tll->childs[0]->childs[0]->childs[1]->tok;
-    sntip = tok->sntip;
+	  printf("got funk\n");
+	tok = tll->childs[1]->childs[0]->tok;
     fid = tok->fid;
-    tt->tips[sntip].ft.funcs[fid].head_pos = *size; // correct
-    //printf("function %s asgnd: sntip %d, fid %d,  hpos %d.\n", tll->childs[0]->childs[0]->childs[1]->tok->tok, sntip, fid, *size);
-    addto_band_new(tll->childs[0]->childs[0]->childs[1], band, size, FUNK, 0); 
-    if (tll->childs[0]->cld_cnt == 3) /* add fparms to band */
-      add_fparms_to_band(tll->childs[0]->childs[1], band, size);
-    build_exec_band_for_main(tll->childs[1], band, size);
+    addto_band_new(tll->childs[1]->childs[0], band, size, FUNK, 0); 
+    add_fparms_to_band_new(tll->childs[1]->childs[0], band, size);
+    build_exec_band_for_main(tll->childs[2], band, size);
     addto_band_new(tll->childs[0], band, size, QAYTAR1, 0); 
     fid++;
     break;
@@ -622,13 +813,16 @@ void build_exec_band_funks(struct tok_list_el *tll, struct band_list_el band[], 
 }
 
 
+
+
 /* traverse tree and extract all kod except funcs and classes kod  */
 void build_exec_band_for_main(struct tok_list_el *tll, struct band_list_el band[], int *size){
 
-  int i, hpos, old_size, old_size1, old_size2, id = tll->id;
+  int i, hpos, old_size, old_size1, old_size2, id;
   struct tok_list_el *tmp, *tll_last;
   struct token *tok;
 
+  id = tll->id;
 
   if (*size > BAND_SIZE){
     printf("Icra lenti dolub.\n");
@@ -637,16 +831,17 @@ void build_exec_band_for_main(struct tok_list_el *tll, struct band_list_el band[
 
   switch(id){
 
-   case SINIF_TYPE: 
    case FUNK:
 	   return;
 
-
   case TEXT:
   case KOD_FUNK:
+  case KOD_PART:
   case BLOCK:
   case KODDATA:
   case HAL2:
+  case COMP_OPER:
+  case SIMPLE_OPER:
 
     if (tll->childs[0]->id == DOVR_EXP){
       addto_band_adrs(tll->childs[0]->childs[2], band, size, &tll_last);
@@ -854,8 +1049,8 @@ void build_exec_band_for_main(struct tok_list_el *tll, struct band_list_el band[
     addto_band_daxilet(tll->childs[0]->childs[1], band, size);
     break;
   case ASGN_OP:
-    addto_band_adrs(tll->childs[0], band, size, &tll_last);
     addto_band_val(tll->childs[2], band, size);
+    addto_band_adrs(tll->childs[0], band, size, &tll_last);
     addto_band_new(tll_last, band, size, ASGN, 0); 
     break;
   case DECREMENT_OPR:
@@ -918,61 +1113,15 @@ void build_exec_band_for_main(struct tok_list_el *tll, struct band_list_el band[
     /* TODO:  remove tmp which is not clear why is it here */
     old_size = *size;
     addto_band_new(tll, band, size, PUT_RET_ADDR, 0); 
-    if (tll->cld_cnt == 3) /* add fargs to band */
-      add_fargs_to_band(tll->childs[1], band, size);
-    tok = tll->childs[0]->childs[0]->tok;
-    hpos = tt->tips[tok->sntip].ft.funcs[tok->fid].head_pos;
-    addto_band_new(tll->childs[0]->childs[0], band, size, FCALL1, hpos);
+    add_fargs_to_band(tll->childs[1], band, size);
+    addto_band_new(tll->childs[0], band, size, FCALL1, hpos);
     /* set dt_area and fields for funcs  */
-    band[*size - 1].dt_size = tt->tips[tok->sntip].ft.funcs[tok->fid].dt.size;
+   // band[*size - 1].dt_size = tt->tips[tok->sntip].ft.funcs[tok->fid].dt.size;
     band[old_size].head_pos = *size;
 	addto_band_new(tll, band, size, POP_FNSTK, 0);
     break;
 
-  case SNMEM:
-    addto_band_adrs(tll->childs[0], band, size, &tll_last);
-    addto_band_ofst(tll->childs[2], band, size, &tll_last);
-    old_size = *size;
-    addto_band_new(tll, band, size, PUT_RET_ADDR, 0); 
-    if (tll_last->cld_cnt == 3) /* add fargs to band */
-      add_fargs_to_band(tll_last->childs[1], band, size);
-    tok = tll_last->childs[0]->childs[0]->tok;
-    hpos = tt->tips[tok->sntip].ft.funcs[tok->fid].head_pos;
-    addto_band_new(tll_last->childs[0]->childs[0], band, size, SNMEM, hpos);
-    band[*size - 1].dt_size = tt->tips[tok->sntip].ft.funcs[tok->fid].dt.size;
-    band[old_size].head_pos = *size;
-    addto_band_new(tll_last, band, size, POP_OBSTK, 0);
-    break;
-
-#if 0
-  case PRG1:
-    prg_start = *size;
-    /* above code is for linux  */
-    band[0].head_pos = prg_start;
-    sntip = GLB_TIP;
-    build_exec_band_for_main(tll->childs[tll->cld_cnt - 2], band, size); //see parsing PRG1
-    addto_band_new(tll->childs[0], band, size, SON, 0); 
-    fid = 1;
-#endif
-    
-    break;
-     /*
-  case FCALL1:
-    return exec_func(tll, ptll, NULL);
-  case SNMEM:
-    return exec_snmem(tll, ptll);
-  case QAYTAR1:
-    return exec_qaytar1(tll, ptll);
-  case DAVAMET1:
-    return exec_davamet1(tll, ptll);
-  case DAYAN1:
-    return exec_dayan1(tll, ptll);
-     */
-
-
- 
-
-  }
+ }
 }
 
 
@@ -987,7 +1136,7 @@ void print_exec_band(struct band_list_el band[], int size){
     print_tok(band[i].id);
     printf("\t");
     print_tok(band[i].band_id);
-    printf("\thpos = %d lgm %d tok %s  tip %d ", band[i].head_pos, band[i].lgm, band[i].tok,  band[i].tip);
+	printf("\thpos = %d\tlgm %d\ttok %s\ttip %d\tofst %d\tstd_func_id %d", band[i].head_pos, band[i].lgm, band[i].tok,  band[i].tip, band[i].ofst, band[i].std_func_id);
     if (band[i].band_id == FUNK || band[i].band_id == FCALL1 || \
 	band[i].band_id == SNMEM)
       printf("%s sntip %d  fid  %d   dt_size %d\n ", band[i].tok, band[i].sntip, band[i].fid, band[i].dt_size);

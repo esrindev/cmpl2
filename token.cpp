@@ -27,11 +27,14 @@ struct token lexems[]={
   {"tam", TAM},
   {"kesr", KESR},
   {"simvol", SIMVOL},
-
+////
+////   For standart functions
+///
+  {"PRINT_INT", PRINT_INT},
 /* !!!!!!!!!!!! DON'T FORGET UPDATE lxmc below !!!!!!!!!!  */
 };
 
-int lxmc = 17 ;
+int lxmc = 18 ;
 
 #define MAX_LINES 10000
 char * lines[MAX_LINES];
@@ -1175,6 +1178,8 @@ void init_hash_ids(){
 
 }
 
+
+
 void print_hash(){
 
   int i;
@@ -2271,6 +2276,10 @@ case  KESR_HEAD:
 
 case  SIMVOL_HEAD:
     printf("SIMVOL_HEAD");
+    break;
+
+case  PRINT_INT:
+    printf("PRINT_INT");
     break;
 
 

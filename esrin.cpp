@@ -8,20 +8,16 @@
 int main(int argc, char *argv[]){
 
   printf("Proqram kompilyasiya olunur...\n");
-
-  if (argc != 2){
-	  printf("Istifade qaydasi: cmpl2  menbe_fayli\n");
-	  exit(0);
-  }
-
-  tokenize(argv[1]);
+ 
+  tokenize("esrin_src_prg.esr"); 
 
   parse();
-
-  exit(0);
    
-  symtab();
+  //symtab();
+  symtab_new();
 
+ // exit(0);
+ 
   printf("Kod generasiya olunur...\n");
 
   generate();

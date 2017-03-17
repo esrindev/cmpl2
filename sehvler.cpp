@@ -156,11 +156,6 @@ void print_after(struct tok_list_el *tll, char *msg){
 }
 
 
-void print_after_test(struct tok_list_el *tll, char *msg){
-	get_row_col_right(tll, &row, &col, &pt); 
-    printf("(%d:%d)sehv: `%s` -dan sonra %s .\n", row, col, pt,msg);    
-}
-
 void print_type_not_def_err(struct token *tok){
 
 		memset(err_msg, '\0', ERR_MSG_LEN);
